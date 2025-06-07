@@ -5,7 +5,18 @@
       "Bash(rm:*)",
       "Bash(mkdir:*)",
       "Bash(mv:*)",
-      "Bash(true)"
+      "Bash(true)",
+      "WebFetch(domain:github.com)",
+      "Bash(pip-compile:*)",
+      "Bash(pip install:*)",
+      "Bash(git clone:*)",
+      "Bash(python test_lmstudio_connection.py:*)",
+      "Bash(find:*)",
+      "Bash(~/.lmstudio/bin/lms:*)",
+      "Bash(pkill:*)",
+      "Bash(python:*)",
+      "Bash(cat:*)",
+      "Bash(curl:*)"
     ],
     "deny": []
   }

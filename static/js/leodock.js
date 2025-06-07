@@ -1,5 +1,150 @@
 // Main JavaScript file for LeoDock Enhanced Platform
 
+// --- LEO Supervisor Functions ---
+function updateLEOActivity() {
+    fetch('/api/leo/activity')
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                document.getElementById('leo-status-text').textContent = 'Offline';
+                document.getElementById('leo-status-dot').style.color = 'red';
+                return;
+            }
+
+            // Update status
+            const status = data.current_status;
+            document.getElementById('leo-status-text').textContent = status.status;
+            document.getElementById('leo-status-dot').style.color = status.status === 'idle' ? 'green' : 'orange';
+            document.getElementById('leo-current-task').textContent = status.current_task || 'No active task';
+
+            // Update activity feed
+            const activityList = document.getElementById('leo-activity-list');
+            activityList.innerHTML = '';
+            
+            data.recent_activities.slice(-10).reverse().forEach(activity => {
+                const activityDiv = document.createElement('div');
+                activityDiv.className = `activity-item importance-${activity.importance}`;
+                
+                const timeSpan = document.createElement('span');
+                timeSpan.className = 'activity-time';
+                timeSpan.textContent = activity.time_friendly;
+                
+                const descSpan = document.createElement('span');
+                descSpan.className = 'activity-description';
+                descSpan.textContent = activity.description;
+                
+                activityDiv.appendChild(timeSpan);
+                activityDiv.appendChild(descSpan);
+                activityList.appendChild(activityDiv);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching LEO activity:', error);
+            document.getElementById('leo-status-text').textContent = 'Error';
+            document.getElementById('leo-status-dot').style.color = 'red';
+        });
+}
+
+function chatWithLEO() {
+    const messageInput = document.getElementById('leo-message');
+    const chatOutput = document.getElementById('leo-chat-output');
+    const message = messageInput.value.trim();
+    
+    if (!message) {
+        alert('Please enter a message for LEO');
+        return;
+    }
+    
+    // Add user message to chat
+    const userDiv = document.createElement('div');
+    userDiv.className = 'chat-message user-message';
+    userDiv.textContent = `You: ${message}`;
+    chatOutput.appendChild(userDiv);
+    
+    messageInput.value = '';
+    
+    // Send to LEO
+    fetch('/api/leo/chat', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            message: message
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        const leoDiv = document.createElement('div');
+        leoDiv.className = 'chat-message leo-message';
+        leoDiv.textContent = `LEO: ${data.leo_response || data.error}`;
+        chatOutput.appendChild(leoDiv);
+        chatOutput.scrollTop = chatOutput.scrollHeight;
+        
+        // Refresh activity after chat
+        setTimeout(updateLEOActivity, 1000);
+    })
+    .catch(error => {
+        console.error('Error chatting with LEO:', error);
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'chat-message error-message';
+        errorDiv.textContent = 'Error communicating with LEO';
+        chatOutput.appendChild(errorDiv);
+    });
+}
+
+function generateCLAUDEmd() {
+    fetch('/api/leo/generate_claude_md')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(`CLAUDE.md generated successfully!\nSaved as: ${data.file}`);
+                // Update activity to show this action
+                setTimeout(updateLEOActivity, 1000);
+            } else {
+                alert(`Error generating CLAUDE.md: ${data.error}`);
+            }
+        })
+        .catch(error => {
+            alert('Error generating CLAUDE.md: ' + error);
+        });
+}
+
+function viewLEOLogs() {
+    // Open LEO activity in a new window or modal
+    window.open('/api/leo/activity', '_blank');
+}
+
+// Initialize LEO activity updates
+document.addEventListener('DOMContentLoaded', function() {
+    // Initial load
+    updateLEOActivity();
+    
+    // Update every 5 seconds  
+    setInterval(updateLEOActivity, 5000);
+    
+    // Update header status
+    setInterval(function() {
+        fetch('/api/leo/status')
+            .then(response => response.json())
+            .then(data => {
+                const headerStatus = document.getElementById('header-leo-status');
+                if (data.error) {
+                    headerStatus.textContent = 'Offline';
+                    headerStatus.style.color = 'red';
+                } else {
+                    headerStatus.textContent = 'Active';
+                    headerStatus.style.color = 'green';
+                }
+            })
+            .catch(() => {
+                const headerStatus = document.getElementById('header-leo-status');
+                headerStatus.textContent = 'Error';
+                headerStatus.style.color = 'red';
+            });
+    }, 10000);
+});
+
 // --- LLM Panel Logic ---
 function sendToLLM() {
     const promptInput = document.getElementById('llm-prompt');

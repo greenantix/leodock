@@ -11,13 +11,14 @@
         <!-- Top Status Bar -->
         <div class="status-bar">
             <div class="status-left">
-                <h1>🦁 LeoDock</h1>
+                <h1>🦁 LeoDock - Autonomous AI Development Platform</h1>
                 <span class="status-indicator">● Terminal: Active</span>
-                <span class="status-indicator">● LLMs: {{ llm_status }}</span>
+                <span class="status-indicator">● LEO Supervisor: <span id="header-leo-status">Connected</span></span>
+                <span class="status-indicator">● LM Studio: Active</span>
             </div>
             <div class="status-right">
-                <button id="start-collaboration">Start LLM Collaboration</button>
-                <button id="view-logs">View Logs</button>
+                <button onclick="generateCLAUDEmd()">Generate CLAUDE.md</button>
+                <button onclick="viewLEOLogs()">View LEO Logs</button>
             </div>
         </div>
 
@@ -26,8 +27,9 @@
             <!-- Left: Terminal Panel -->
             <div class="panel terminal-panel">
                 <div class="panel-header">
-                    <h3>Claude Code Terminal</h3>
+                    <h3>🖥️ Development Terminal</h3>
                     <div class="terminal-controls">
+                        <span class="terminal-info">🤖 LEO is monitoring all commands</span>
                         <button onclick="restartTerminal()">Restart</button>
                         <button onclick="clearTerminal()">Clear</button>
                     </div>
@@ -38,21 +40,35 @@
                 </div>
             </div>
 
-            <!-- Right: LLM Interaction Panel -->
+            <!-- Right: LEO Supervisor Panel -->
             <div class="panel llm-panel">
                 <div class="panel-header">
-                    <h3>LLM Assistance</h3>
-                    <select id="llm-selector">
-                        <option value="indexing">IndexingLLM (Leo)</option>
-                        <option value="quality">QualityLLM (Quinn)</option>
-                        <option value="fallback">Fallback API</option>
-                    </select>
+                    <h3>🤖 LEO Supervisor</h3>
+                    <div class="leo-status-indicator">
+                        <span id="leo-status-dot">●</span>
+                        <span id="leo-status-text">Loading...</span>
+                    </div>
                 </div>
                 <div class="panel-content">
-                    <div class="llm-output" id="llm-output"></div>
-                    <div class="llm-input-area">
-                        <textarea id="llm-prompt" placeholder="Ask the LLMs for help..."></textarea>
-                        <button onclick="sendToLLM()">Send</button>
+                    <div class="leo-current-status">
+                        <h4>Current Task:</h4>
+                        <div id="leo-current-task">Initializing...</div>
+                    </div>
+                    
+                    <div class="leo-activity-feed">
+                        <h4>Recent Activity:</h4>
+                        <div id="leo-activity-list" class="activity-list">
+                            Loading LEO activity...
+                        </div>
+                    </div>
+                    
+                    <div class="leo-chat-section">
+                        <h4>Chat with LEO:</h4>
+                        <div id="leo-chat-output" class="chat-output"></div>
+                        <div class="leo-input-area">
+                            <textarea id="leo-message" placeholder="Ask LEO about current status..."></textarea>
+                            <button onclick="chatWithLEO()">Send to LEO</button>
+                        </div>
                     </div>
                 </div>
             </div>
