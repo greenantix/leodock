@@ -37,6 +37,8 @@ class ChatHistoryManager:
         
         cursor.execute('''
             CREATE INDEX IF NOT EXISTS idx_timestamp ON conversations(timestamp);
+        ''')
+        cursor.execute('''
             CREATE INDEX IF NOT EXISTS idx_session ON conversations(session_id);
         ''')
         
