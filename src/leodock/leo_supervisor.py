@@ -7,7 +7,7 @@ import json
 import time
 from datetime import datetime
 from typing import Dict, List, Optional, Any
-import lmstudio as lms
+from . import lmstudio as lms
 from anthropic import Anthropic
 import logging
 

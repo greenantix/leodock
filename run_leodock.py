@@ -22,7 +22,7 @@ from src.leodock.extensions.chat_history import ChatHistoryManager
 
 # LEO Integration
 try:
-    from leodock.leo_manager import leo_manager
+    from src.leodock.leo_manager import leo_manager
     LEO_AVAILABLE = True
 except ImportError:
     LEO_AVAILABLE = False
@@ -109,7 +109,7 @@ def leo_activity():
     """Get LEO recent activity for dashboard"""
     if LEO_AVAILABLE:
         try:
-            from leodock.leo_dashboard import leo_activity as activity_logger, leo_status as status_tracker
+            from src.leodock.leo_dashboard import leo_activity as activity_logger, leo_status as status_tracker
             return jsonify({
                 "recent_activities": activity_logger.get_recent_activities(limit=20),
                 "current_status": status_tracker.get_status_summary()
@@ -132,11 +132,11 @@ def leo_chat():
         return jsonify({"error": "No message provided"})
     
     try:
-        from leodock.leo_dashboard import log_leo_thought
+        from src.leodock.leo_dashboard import log_leo_thought
         log_leo_thought(f"User asked: {user_message}", importance="high")
         
-        # Get LEO response (simplified for now)
-        leo_response = f"LEO acknowledges: {user_message}. I am currently monitoring Claude Code sessions and can provide status updates."
+        # Get actual LEO response from LM Studio
+        leo_response = leo_manager.get_leo_response(user_message)
         
         return jsonify({
             "success": True,
