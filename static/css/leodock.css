@@ -1,0 +1,204 @@
+/* Placeholder for LeoDock custom styling */
+/* This file will contain all CSS rules for the enhanced platform. */
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.leodock-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.status-bar {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.status-bar h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.status-left {
+    display: flex;
+    align-items: center;
+}
+
+.status-indicator {
+    margin-left: 20px;
+    font-size: 0.9em;
+}
+
+.status-right button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #555;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.status-right button:hover {
+    background-color: #777;
+}
+
+.main-content {
+    display: flex;
+    flex-grow: 1;
+    padding: 10px;
+    gap: 10px;
+    overflow: hidden; /* Prevent panels from overflowing */
+}
+
+.panel {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Ensure content within panel is scrollable if needed */
+}
+
+.panel-header {
+    background-color: #eee;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.panel-header h3 {
+    margin: 0;
+    font-size: 1.1em;
+}
+
+.panel-content {
+    padding: 10px;
+    flex-grow: 1;
+    overflow-y: auto; /* Allow scrolling for panel content */
+    display: flex; /* For terminal iframe to fill height */
+    flex-direction: column; /* For terminal iframe to fill height */
+}
+
+.terminal-panel {
+    flex: 1; /* Takes up available space */
+}
+
+.terminal-frame {
+    width: 100%;
+    height: 100%; /* Fill available space in panel-content */
+    border: none;
+    flex-grow: 1; /* Ensure iframe takes up remaining space */
+}
+
+.llm-panel {
+    flex: 1; /* Takes up available space */
+    display: flex;
+    flex-direction: column;
+}
+
+.llm-output {
+    border: 1px solid #ccc;
+    min-height: 100px;
+    padding: 5px;
+    margin-bottom: 10px;
+    flex-grow: 1;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+}
+
+.llm-input-area {
+    display: flex;
+    gap: 5px;
+    flex-shrink: 0;
+}
+
+.llm-input-area textarea {
+    flex-grow: 1;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    resize: vertical;
+}
+
+.llm-input-area button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.llm-input-area button:hover {
+    background-color: #0056b3;
+}
+
+.history-panel {
+    height: 250px; /* Fixed height for history panel */
+    flex-shrink: 0; /* Prevent shrinking */
+    margin-top: 10px; /* Add margin if it's below main-content */
+    display: flex;
+    flex-direction: column;
+}
+
+.history-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.history-controls input[type="text"] {
+    flex-grow: 1;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.history-controls button {
+    padding: 5px 10px;
+    background-color: #555;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.history-controls button:hover {
+    background-color: #777;
+}
+
+.history-list {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+/* Adjustments for the new layout where history panel is at the bottom */
+.leodock-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.main-content {
+    flex-grow: 1; /* Allows main content to take up space */
+    display: flex; /* Side-by-side panels */
+}
+
+/* The history panel is now outside and below main-content */
+/* Ensure it's correctly positioned if it's meant to be at the very bottom of the page */

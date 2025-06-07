@@ -1,0 +1,33 @@
+cat <<EOF > .gitignore
+# Node
+node_modules
+dist
+build
+.next
+out
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS crap
+.DS_Store
+Thumbs.db
+
+# IDE/editor trash
+.vscode
+.idea
+
+# Environment files
+.env
+.env.local
+.env.*
+
+# Firebase
+firebase-debug.log
+.firebaserc
+
+# Other
+*.swp
+*.bak
+EOF

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeoDock - Claude Code Integration Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/leodock.css') }}">
+</head>
+<body>
+    <div class="leodock-container">
+        <!-- Top Status Bar -->
+        <div class="status-bar">
+            <div class="status-left">
+                <h1>🦁 LeoDock</h1>
+                <span class="status-indicator">● Terminal: Active</span>
+                <span class="status-indicator">● LLMs: {{ llm_status }}</span>
+            </div>
+            <div class="status-right">
+                <button id="start-collaboration">Start LLM Collaboration</button>
+                <button id="view-logs">View Logs</button>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Left: Terminal Panel -->
+            <div class="panel terminal-panel">
+                <div class="panel-header">
+                    <h3>Claude Code Terminal</h3>
+                    <div class="terminal-controls">
+                        <button onclick="restartTerminal()">Restart</button>
+                        <button onclick="clearTerminal()">Clear</button>
+                    </div>
+                </div>
+                <div class="panel-content">
+                    <!-- Embed the working terminal -->
+                    <iframe src="http://localhost:5000" class="terminal-frame"></iframe>
+                </div>
+            </div>
+
+            <!-- Right: LLM Interaction Panel -->
+            <div class="panel llm-panel">
+                <div class="panel-header">
+                    <h3>LLM Assistance</h3>
+                    <select id="llm-selector">
+                        <option value="indexing">IndexingLLM (Leo)</option>
+                        <option value="quality">QualityLLM (Quinn)</option>
+                        <option value="fallback">Fallback API</option>
+                    </select>
+                </div>
+                <div class="panel-content">
+                    <div class="llm-output" id="llm-output"></div>
+                    <div class="llm-input-area">
+                        <textarea id="llm-prompt" placeholder="Ask the LLMs for help..."></textarea>
+                        <button onclick="sendToLLM()">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom: Chat History Panel -->
+        <div class="panel history-panel">
+            <div class="panel-header">
+                <h3>Conversation History</h3>
+                <div class="history-controls">
+                    <input type="text" id="search-input" placeholder="Search conversations...">
+                    <button onclick="searchHistory()">Search</button>
+                    <button onclick="exportHistory()">Export</button>
+                </div>
+            </div>
+            <div class="panel-content">
+                <div class="history-list" id="history-list">
+                    <!-- Chat history will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/leodock.js') }}"></script>
+</body>
+</html>
