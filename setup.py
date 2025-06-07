@@ -16,47 +16,41 @@ import distutils.text_file
 
 CURDIR = Path(__file__).parent
 
-EXCLUDE_FROM_PACKAGES = ["tests"]
+EXCLUDE_FROM_PACKAGES = ["tests*"]
 
 
 with io.open(os.path.join(CURDIR, "README.md"), "r", encoding="utf-8") as f:
     README = f.read()
 
 
-def get_version() -> str:
-    main_file = CURDIR / "pyxtermjs" / "app.py"
-    _version_re = re.compile(r"__version__\s+=\s+(?P<version>.*)")
-    with open(main_file, "r", encoding="utf8") as f:
-        match = _version_re.search(f.read())
-        version = match.group("version") if match is not None else '"unknown"'
-    return str(ast.literal_eval(version))
 
 
 setup(
-    name="pyxtermjs",
-    version=get_version(),
-    author="Chad Smith",
-    author_email="chadsmith.software@gmail.com",
-    description="interactive terminal in the browser",
+    name="leodock",
+    version="1.0.0",
+    author="greenantix",
+    author_email="your-email@example.com",
+    description="AI-powered development platform with integrated terminal and LLM collaboration",
     long_description=README,
     long_description_content_type="text/markdown",
-    url="https://github.com/cs01/pyxtermjs",
+    url="https://github.com/greenantix/leodock",
     license="License :: OSI Approved :: MIT License",
-    packages=find_packages(exclude=EXCLUDE_FROM_PACKAGES),
+    packages=find_packages("src", exclude=EXCLUDE_FROM_PACKAGES),
+    package_dir={"": "src"},
     include_package_data=True,
     keywords=[
-        "xterm",
-        "xterm.js",
-        "javascript",
-        "terminal-emulators",
-        "browser",
-        "tty",
-        "pty",
-        "console",
+        "ai",
+        "llm",
+        "development",
         "terminal",
+        "browser",
+        "collaboration",
+        "python",
+        "flask",
+        "socketio",
     ],
     scripts=[],
-    entry_points={"console_scripts": ["pyxtermjs = pyxtermjs.app:main"]},
+    entry_points={"console_scripts": ["leodock = run_leodock:main"]},
     extras_require={},
     zip_safe=False,
     python_requires=">=3.6",

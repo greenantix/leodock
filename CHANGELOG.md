@@ -1,14 +1,24 @@
-## 0.5.0.2
+# Changelog
 
-- support copy and paste in terminal (#27)
+All notable changes to LeoDock will be documented in this file.
 
-## 0.5.0.1
+## [1.0.0] - 2024-01-XX
 
-- Do not fail on unicode decode errors
-- Cast port argument as an integer
+### Added
+- Initial release of LeoDock platform
+- AI-powered development environment with integrated terminal
+- Multi-LLM support (Claude, local models)
+- Real-time chat interface with persistent history
+- WebSocket-based communication
+- Modular extension system
+- Auto-assist functionality
+- Modern project structure with src/ layout
 
-## 0.5.0.0
+### Changed
+- Completely rewritten from pyxterm.js fork
+- Updated branding and documentation
+- Reorganized codebase for better maintainability
 
-- Update dependencies xtermjs and socketio
-- Turn off flask's logging
-- Update setup.py to install from pinned dependencies in requirements.tx
+### Removed
+- Legacy pyxterm.js references
+- Old development artifacts and temporary files

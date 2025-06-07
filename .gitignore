@@ -1,58 +1,83 @@
-# Node
-node_modules
-dist
-build
-.next
-out
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Testing
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# IDE/Editor
+.vscode/
+.idea/
+*.sublime-*
+.history
+.ionide
+*.swp
+*.swo
+*~
+*.bak
+
+# OS
+.DS_Store
+Thumbs.db
 
 # Logs
 *.log
 npm-debug.log*
 
-# OS crap
-.DS_Store
-Thumbs.db
+# Database
+*.db
+*.sqlite
+*.sqlite3
 
-# IDE/editor trash
-.vscode
-.idea
-*.sublime-*
-.history
-.ionide
+# Temporary files
+tmp/
+temp/
+.tmp/
 
-# Environment files
-.env
-.env.local
-.env.*
-.env.development.local
-.env.test.local
-.env.production.local
-
-# Firebase
-firebase-debug.log
-.firebaserc
-firebase-debug.*.log*
-
-# Coverage directories
-coverage
-.nyc_output
-
-# Cache
-.cache
-.eslintcache
-.stylelintcache
-.parcel-cache
-
-# Other
-*.swp
-*.bak
-*~
-.DS_Store
-yarn-error.log
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
+# Node (if using any JS tools)
+node_modules/
+dist/
+.next/
+out/
+.cache/
+.eslintcache/
+.stylelintcache/
+.parcel-cache/
